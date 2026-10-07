@@ -1,0 +1,22 @@
+class Solution {
+ 
+    public int carFleet(int target, int[] position, int[] speed) {
+        int n = position.length;
+        int[][] cars = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            cars[i][0] = position[i];
+            cars[i][1] = speed[i];
+        }
+        Arrays.sort(cars, (x, y) -> y[0] - x[0]);
+        double longestTime = -1;
+        int carFleets = 0;
+        for (int[] car: cars) {
+            double time = (double) (target - car[0]) / car[1];
+            if (longestTime < time) {
+                carFleets++;
+                longestTime = time;
+            }
+        }
+        return carFleets;
+    }
+}
